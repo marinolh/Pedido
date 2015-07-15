@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form >  
+        <p:growl id="messages" showDetail="false"/>
+        <p:menu>
+            <p:submenu label="Ajax">
+                <p:menuitem value="Save" update="messages" icon="ui-icon-disk" />
+                <p:menuitem value="Update" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+            </p:submenu>
+            <p:submenu label="Navigations">
+                <p:menuitem value="Internal" icon="ui-icon-star"/>
+            </p:submenu>
+        </p:menu>
+    </h:form>
+</ui:composition>
