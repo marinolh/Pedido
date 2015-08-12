@@ -52,6 +52,12 @@ public class Pedido implements Serializable {
     @Size(max = 24)
     @Column(name = "numero")
     private String numero;
+    @Size(max = 32)
+    @Column(name = "codigo")
+    private String codigo;
+    @Size(max = 1024)
+    @Column(name = "observacion")
+    private String observacion;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "total")
     private Double total;

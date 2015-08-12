@@ -20,11 +20,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>PedidoEmpresarial</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>javax.faces</groupId>
             <artifactId>jsf-api</artifactId>
             <version>2.1</version>
@@ -41,6 +36,11 @@
             <artifactId>servlet-api</artifactId>
             <version>3.0-alpha-1</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PedidoEmpresarial</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>

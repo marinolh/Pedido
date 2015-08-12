@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
         if (validaUsuario(user, pass)) {
             System.out.println("user: " + user);
             System.out.println("pass: " + pass);
-            RequestDispatcher rs = request.getRequestDispatcher("/vista/sistema/pagina2.xhtml");
+            RequestDispatcher rs = request.getRequestDispatcher("/vista/sistema/registroPedido.xhtml");
             rs.forward(request, response);
         } else {
             //  out.println("Username or Password incorrect");
