@@ -9,14 +9,95 @@
         <ui:composition template="./../../WEB-INF/plantilla/sistema/capasSistema.xhtml">
             <ui:define name="content">
                 <p><h3 class="text-center text-primary">Registrar cliente</h3></p>
-                <h:form>
-                    <div class="container-fluid input-group panel panel-default">
-                        <br/>
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10">
-                        </div>
+                <h:form id="frmAgregarCliente">
+                    <div class="row-fluid">
+                        <p:commandLink value="Agregar Cliente"  actionListener="#{clienteBean.agregarCliente}"
+                                       onclick="$(divPanelAgregar).modal('show');" ajax="true"/> 
+                    </div>
+                    <div class="row-fluid">
+                        <p:dataTable id="dtTabla" var="data" value="#{clienteBean.traerCliente}">
+                            <p:column headerText="Nombre">
+                                <p:outputLabel value="#{data.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Dirección">
+                                <p:outputLabel value="#{data.direccion}"/>                        
+                            </p:column>
+                            <p:column headerText="Teléfono">
+                                <p:outputLabel value="#{data.telefono}"/>                        
+                            </p:column>
+                            <p:column headerText="Representante">
+                                <p:outputLabel value="#{data.representante}"/>                        
+                            </p:column>
+                            <p:column headerText="Correo">
+                                <p:outputLabel value="#{data.correo}"/>                        
+                            </p:column>
+                            <p:column >
+                                <p:commandLink value="#{clienteBean.seleccionar}"/>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                 </h:form>
+                <div class="modal" id="divPanelAgregar" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" style="z-index: 1045;">
+                        <h:form id="frmCliente">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    Registrar Cliente
+                                </div>
+                                <div class="modal-body panel panel-footer">
+                                    <div class="container-fluid input-group panel panel-default">
+                                        <br/>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-3">Nombre: </div>
+                                            <div class="col-lg-10">
+                                                <p:inputText value="#{clienteBean.clienteVo.nombre}" size="45"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-3">Dirección: </div>
+                                            <div class="col-lg-10">
+                                                <p:inputTextarea cols="45" rows="2" value="#{clienteBean.clienteVo.direccion}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-3">Teléfono: </div>
+                                            <div class="col-lg-10">
+                                                <p:inputText value="#{clienteBean.clienteVo.telefono}" size="45"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-3">Correo: </div>
+                                            <div class="col-lg-10">
+                                                <p:inputText value="#{clienteBean.clienteVo.correo}" size="45"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-3">Representante: </div>
+                                            <div class="col-lg-10">
+                                                <p:inputText value="#{clienteBean.clienteVo.representante}" size="45"/>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-3"></div>
+                                        <div class="col-lg-10">
+                                            <h:commandLink value="Guardar" class="btn btn-primary" 
+                                                           actionListener="#{clienteBean.guardarCliente}" />
+                                            <h:commandLink value="Cancelar" class="btn btn-default" 
+                                                           actionListener="#{clienteBean.cancelarCliente}"
+                                                           onclick="$(divPanelAgregar).modal('hide');">
+                                                <f:ajax execute="@all" render="@all"/>
+                                            </h:commandLink> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
             </ui:define>
         </ui:composition>
     </body>

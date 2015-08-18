@@ -6,8 +6,6 @@
 package mx.pedido;
 
 import java.io.IOException;
-import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
