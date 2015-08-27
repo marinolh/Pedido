@@ -7,6 +7,8 @@
         <p:growl id="messages" showDetail="false"/>
         <p:menu >
             <p:submenu label="Administración">
+                <p:menuitem value="Registrar usuario" update="messages" icon="ui-icon-disk" 
+                            action="/vista/sistema/registroUsuario" ajax="true"/>
                 <p:menuitem value="Registrar cliente" update="messages" icon="ui-icon-disk" 
                             action="/vista/sistema/registrarCliente" ajax="true"/>
                 <p:menuitem value="Registrar pedido" update="messages" icon="ui-icon-disk" 

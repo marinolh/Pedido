@@ -8,11 +8,16 @@ package mx.pedido.registro.bean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-import mx.pedido.empresarial.modelo.Cliente;
+import mx.pedido.empresarial.local.PedidoLocal;
 import mx.pedido.empresarial.modelo.vo.ClienteVo;
 import mx.pedido.empresarial.modelo.vo.PedidoVo;
+import mx.pedido.sesion.FacesUtils;
+import mx.pedido.sesion.Sesion;
 
 /**
  *
@@ -27,8 +32,15 @@ public class PedidoBean {
      */
     public PedidoBean() {
     }
+    @EJB
+    private PedidoLocal pedidoLocal;
+    //
     private PedidoVo pedidoVo;
     private String cliente;
+    private int idCliente;
+
+    @ManagedProperty(value = "sesion")
+    private Sesion sesion;
 
     //
     @PostConstruct
@@ -53,6 +65,18 @@ public class PedidoBean {
     public List<ClienteVo> traerCliente() {
         List<ClienteVo> lista = new ArrayList<>();
         return lista;
+    }
+
+    public void guardar(ActionEvent event) {
+        if (pedidoLocal.guardar(sesion.getUsuarioVo().getId(), getPedidoVo(), getIdCliente())) {
+            FacesUtils.addInfoMessage("Se registró el pedido . . . ");
+            pedidoVo = null;
+        } else {
+            FacesUtils.addErrorMessage("Ocurrio un error, favor de verificar.");
+        }
+    }
+
+    public void cancelar(ActionEvent event) {
     }
 
     /**
@@ -81,5 +105,26 @@ public class PedidoBean {
      */
     public void setCliente(String cliente) {
         this.cliente = cliente;
+    }
+
+    /**
+     * @param sesion the sesion to set
+     */
+    public void setSesion(Sesion sesion) {
+        this.sesion = sesion;
+    }
+
+    /**
+     * @return the idCliente
+     */
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 }

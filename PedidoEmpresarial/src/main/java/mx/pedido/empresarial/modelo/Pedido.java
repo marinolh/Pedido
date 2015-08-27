@@ -24,6 +24,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -42,6 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pedido.findByCliente", query = "SELECT p FROM Pedido p WHERE p.cliente = :cliente"),
     @NamedQuery(name = "Pedido.findByEliminado", query = "SELECT p FROM Pedido p WHERE p.eliminado = :eliminado"),
     @NamedQuery(name = "Pedido.findByFechaGenero", query = "SELECT p FROM Pedido p WHERE p.fechaGenero = :fechaGenero")})
+@Getter
+@Setter
 public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,18 +69,22 @@ public class Pedido implements Serializable {
     private Double subtotal;
     @Column(name = "impuesto")
     private Double impuesto;
-    @Column(name = "cliente")
-    private Integer cliente;
     @Column(name = "eliminado")
     private Boolean eliminado;
     @Column(name = "fecha_genero")
     @Temporal(TemporalType.DATE)
     private Date fechaGenero;
+    @Column(name = "hora_genero")
+    @Temporal(TemporalType.TIME)
+    private Date horaGenero;
     @OneToMany(mappedBy = "pedido")
     private Collection<Envio> envioCollection;
     @JoinColumn(name = "genero", referencedColumnName = "id")
     @ManyToOne
     private Usuario genero;
+    @JoinColumn(name = "cliente", referencedColumnName = "id")
+    @ManyToOne
+    private Cliente cliente;
     @JoinColumn(name = "moneda", referencedColumnName = "id")
     @ManyToOne
     private Moneda moneda;
@@ -92,112 +100,6 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
-    public Double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Double getImpuesto() {
-        return impuesto;
-    }
-
-    public void setImpuesto(Double impuesto) {
-        this.impuesto = impuesto;
-    }
-
-    public Integer getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Integer cliente) {
-        this.cliente = cliente;
-    }
-
-    public Boolean getEliminado() {
-        return eliminado;
-    }
-
-    public void setEliminado(Boolean eliminado) {
-        this.eliminado = eliminado;
-    }
-
-    public Date getFechaGenero() {
-        return fechaGenero;
-    }
-
-    public void setFechaGenero(Date fechaGenero) {
-        this.fechaGenero = fechaGenero;
-    }
-
-    @XmlTransient
-    public Collection<Envio> getEnvioCollection() {
-        return envioCollection;
-    }
-
-    public void setEnvioCollection(Collection<Envio> envioCollection) {
-        this.envioCollection = envioCollection;
-    }
-
-    public Usuario getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Usuario genero) {
-        this.genero = genero;
-    }
-
-    public Moneda getMoneda() {
-        return moneda;
-    }
-
-    public void setMoneda(Moneda moneda) {
-        this.moneda = moneda;
-    }
-
-    @XmlTransient
-    public Collection<PedidoEstado> getPedidoEstadoCollection() {
-        return pedidoEstadoCollection;
-    }
-
-    public void setPedidoEstadoCollection(Collection<PedidoEstado> pedidoEstadoCollection) {
-        this.pedidoEstadoCollection = pedidoEstadoCollection;
-    }
-
-    @XmlTransient
-    public Collection<PedidoDetalle> getPedidoDetalleCollection() {
-        return pedidoDetalleCollection;
-    }
-
-    public void setPedidoDetalleCollection(Collection<PedidoDetalle> pedidoDetalleCollection) {
-        this.pedidoDetalleCollection = pedidoDetalleCollection;
-    }
 
     @Override
     public int hashCode() {

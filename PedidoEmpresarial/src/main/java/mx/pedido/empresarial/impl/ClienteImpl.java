@@ -11,7 +11,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import mx.pedido.empresarial.local.AbstractFacade;
 import mx.pedido.empresarial.local.ClienteLocal;
 import mx.pedido.empresarial.modelo.Cliente;
 import mx.pedido.empresarial.modelo.Usuario;
@@ -22,7 +21,7 @@ import mx.pedido.empresarial.modelo.vo.ClienteVo;
  * @author ihsa
  */
 @Stateless
-public class ClienteImpl extends AbstractFacade<Cliente> implements ClienteLocal {
+public class ClienteImpl extends AbstractPedido<Cliente> implements ClienteLocal {
 
     @PersistenceContext(unitName = "PedidoEmpresarialPU")
     private EntityManager em;
@@ -41,7 +40,9 @@ public class ClienteImpl extends AbstractFacade<Cliente> implements ClienteLocal
         boolean v = true;
         try {
             Cliente cliente = new Cliente();
+            cliente.setRfc(clienteVo.getRfc());
             cliente.setNombre(clienteVo.getNombre());
+            cliente.setCodigoReferencia(clienteVo.getRfc().substring(0,4));
             cliente.setDireccion(clienteVo.getDireccion());
             cliente.setTelefono(cliente.getTelefono());
             cliente.setRepresentante(cliente.getRepresentante());

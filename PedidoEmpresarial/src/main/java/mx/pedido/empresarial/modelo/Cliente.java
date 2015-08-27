@@ -44,6 +44,7 @@ import lombok.Setter;
     @NamedQuery(name = "Cliente.findByEliminado", query = "SELECT c FROM Cliente c WHERE c.eliminado = :eliminado"),
     @NamedQuery(name = "Cliente.findByFechaGenero", query = "SELECT c FROM Cliente c WHERE c.fechaGenero = :fechaGenero")})
 public class Cliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -55,6 +56,12 @@ public class Cliente implements Serializable {
     @Size(min = 1, max = 256)
     @Column(name = "nombre")
     private String nombre;
+    @Size(min = 1, max = 32)
+    @Column(name = "codigo_referencia")
+    private String codigoReferencia;
+    @Size(min = 1, max = 20)
+    @Column(name = "rfc")
+    private String rfc;
     @Size(max = 512)
     @Column(name = "direccion")
     private String direccion;
@@ -110,5 +117,5 @@ public class Cliente implements Serializable {
     public String toString() {
         return "mx.pedido.empresarial.modelo.Cliente[ id=" + id + " ]";
     }
-    
+
 }

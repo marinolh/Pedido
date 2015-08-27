@@ -6,9 +6,18 @@
 package mx.pedido;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import mx.pedido.empresarial.local.UsuarioLocal;
+import mx.pedido.empresarial.modelo.vo.UsuarioVo;
+import mx.pedido.sesion.Sesion;
 
 /**
  *
@@ -16,6 +25,11 @@ import javax.servlet.http.*;
  */
 @WebServlet(name = "Login", urlPatterns = {"/Rastreo"})
 public class Login extends HttpServlet {
+
+    @EJB
+    private UsuarioLocal usuarioLocal;
+    @ManagedProperty(name = "sesion", value = "sesion")
+    private Sesion sesion;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -75,7 +89,26 @@ public class Login extends HttpServlet {
     }
 
     private boolean validaUsuario(String user, String pass) {
-        return true;
+        UsuarioVo uv = usuarioLocal.buscarPorId(user);
+        boolean v = false;
+        if (uv != null) {
+            try {
+                if (uv.getClave().equals(usuarioLocal.encriptar(pass))) {
+                    sesion.setUsuarioVo(uv);
+                    v = true;
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return v;
+    }
+
+    /**
+     * @param sesion the sesion to set
+     */
+    public void setSesion(Sesion sesion) {
+        this.sesion = sesion;
     }
 
 }

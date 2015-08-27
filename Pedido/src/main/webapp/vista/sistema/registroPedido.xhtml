@@ -22,8 +22,8 @@
                                     <p:autoComplete id="cliente" multiple="false" value="#{pedido.pedidoVo.nombreCliente}" 
                                                     completeMethod="#{pedido.traerCliente()}" size="45"
                                                     var="nombreCliente" itemLabel="#{nombreCliente.displayName}" itemValue="#{nombreCliente}" 
-                                                     forceSelection="true">
-                                            <h:outputText value="#{pedido.cliente}" />
+                                                    forceSelection="true">
+                                        <h:outputText value="#{pedido.cliente}" />
                                     </p:autoComplete>
                                 </div>
                             </div>
@@ -82,10 +82,10 @@
                         <div class="col-lg-10" style="margin-bottom:  1%;"><br/>
                             <div class="col-lg-2"></div>
                             <div class="col-lg-2">
-                                <h:commandLink value="Guardar" class="btn btn-info" />
+                                <h:commandLink value="Guardar" class="btn btn-info" actionListener="#{pedido.guardar}" />
                             </div>
                             <div class="col-lg-2">
-                                <h:commandLink value="Cancelar" class="btn btn-default" />
+                                <h:commandLink value="Cancelar" class="btn btn-default" actionListener="#{pedido.cancelar}"/>
                             </div>
                         </div>
                     </div>

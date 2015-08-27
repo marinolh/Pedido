@@ -5,9 +5,11 @@
  */
 package mx.pedido.empresarial.local;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.ejb.Local;
 import mx.pedido.empresarial.modelo.Usuario;
+import mx.pedido.empresarial.modelo.vo.UsuarioVo;
 
 /**
  *
@@ -29,5 +31,11 @@ public interface UsuarioLocal {
     List<Usuario> findRange(int[] range);
 
     int count();
+
+    UsuarioVo buscarPorId(String user);
+
+    void guardar(String id, UsuarioVo usuarioVo);
+
+    String encriptar(String text) throws NoSuchAlgorithmException;
     
 }

@@ -16,6 +16,7 @@ import lombok.Setter;
 @Setter
 public class ClienteVo {
     private int id;
+    private String rfc;
     private String nombre;
     private String direccion;
     private String telefono;

@@ -8,6 +8,7 @@ package mx.pedido.empresarial.local;
 import java.util.List;
 import javax.ejb.Local;
 import mx.pedido.empresarial.modelo.Pedido;
+import mx.pedido.empresarial.modelo.vo.PedidoVo;
 
 /**
  *
@@ -29,5 +30,7 @@ public interface PedidoLocal {
     List<Pedido> findRange(int[] range);
 
     int count();
+
+    public boolean guardar(String sesion, PedidoVo pedidoVo, Integer cliente);
     
 }
