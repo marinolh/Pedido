@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+        <ui:composition template="./../../WEB-INF/plantilla/sistema/capasSistema.xhtml">
+            <ui:define name="content">
+                <p><h3 class="text-center text-primary">Registrar pedido</h3></p>
+                <h:form>
+                    <div class="container-fluid input-group panel panel-default">
+                        <br/>
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <div class="col-lg-12" >
+                                <div class="col-lg-2" style="text-align: left;" >
+                                    <p:outputLabel   value="Cliente:" for="cliente"/>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p:autoComplete id="cliente" multiple="false" value="#{pedido.pedidoVo.nombreCliente}" 
+                                                    completeMethod="#{pedido.traerCliente()}" size="45"
+                                                    var="nombreCliente" itemLabel="#{nombreCliente.displayName}" itemValue="#{nombreCliente}" 
+                                                    forceSelection="true">
+                                        <h:outputText value="#{pedido.cliente}" />
+                                    </p:autoComplete>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="margin-top: 1%;">
+                                <div class="col-lg-2" style="text-align: left;" >
+                                    <p:outputLabel   value="Número: "/>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p:inputText  value="#{pedido.pedidoVo.numero}"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="margin-top: 1%;">
+                                <div class="col-lg-2" style="text-align: left;" >
+                                    <p:outputLabel   value="Subtotal:"/>
+                                </div>
+                                <div class="col-lg-8" >
+                                    <p:inputText  value="#{pedido.pedidoVo.subtotal}"/>
+                                </div>
+                            </div>                                        
+                            <div class="col-lg-12" style="margin-top: 1%;">
+                                <div class="col-lg-2" style="text-align: left;" >
+                                    <p:outputLabel   value="Impusto:"/>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p:inputText  value="#{pedido.pedidoVo.impuesto}"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="margin-top: 1%;">
+                                <div class="col-lg-2" style="text-align: left;" >
+                                    <p:outputLabel   value="Total:"/>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p:inputText   value="#{pedido.pedidoVo.total}"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="margin-top: 1%;"> 
+                                <div class="col-lg-2" style="text-align: left;" >
+                                    <p:outputLabel   value="Móneda:"/>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p:selectOneMenu id="moneda" value="#{pedido.pedidoVo.idMoneda}"> 
+                                        <f:selectItem itemLabel="Seleccione . . ." 
+                                                      itemValue="-1"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" style="margin-top: 1%;">
+                                <div class="col-lg-2" style="text-align: left;" >
+                                    <p:outputLabel    value="Observación:"/>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p:inputTextarea cols="45" rows="3" value="#{pedido.pedidoVo.observacion}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-10" style="margin-bottom:  1%;"><br/>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-2">
+                                <h:commandLink value="Guardar" class="btn btn-info" actionListener="#{pedido.guardar}" />
+                            </div>
+                            <div class="col-lg-2">
+                                <h:commandLink value="Cancelar" class="btn btn-default" actionListener="#{pedido.cancelar}"/>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

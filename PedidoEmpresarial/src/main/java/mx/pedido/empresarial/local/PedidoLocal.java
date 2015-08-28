@@ -31,6 +31,10 @@ public interface PedidoLocal {
 
     int count();
 
-    public boolean guardar(String sesion, PedidoVo pedidoVo, Integer cliente);
-    
+    boolean guardar(String sesion, PedidoVo pedidoVo, Integer cliente);
+
+
+    PedidoVo buscarPedido(String codigo);
+
+
 }

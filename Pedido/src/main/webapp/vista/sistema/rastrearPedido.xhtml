@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+        <ui:composition template="./../../WEB-INF/plantilla/sistema/capasSistema.xhtml">
+            <ui:define name="content">
+                <p><h3 class="text-center text-primary">Consultar pedido</h3></p>
+                <h:form id="frmAgregarCliente">
+                    <div class="container">                      
+                        <div class="col-lg-2">
+                            <div class="panel-heading">
+
+                            </div>
+                            <div class="panel-body">
+                                <p:outputLabel value="Número:"/>
+                                <p:inputText value="#{consultaPedidoBean.numeroPedido}"/>
+                                <p:commandLink value="Buscar" actionListener="#{consultaPedidoBean.buscar(e)}"/>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="panel-heading">
+                                Resultados
+                            </div>
+                            <div class="panel-body">
+                                <p:dataTable var="data" value="#{consultaPedidoBean.listaPedido}">
+                                    <p:column headerText="Némero">
+                                        <h:outputText value="#{data.numeroPedido}" />
+                                    </p:column>
+
+                                    <p:column headerText="Salida">
+                                        <h:outputText value="#{data.fechaSalida}" />
+                                    </p:column>
+
+                                    <p:column headerText="Ciudad remitente">
+                                        <h:outputText value="#{data.origen}" />
+                                    </p:column>
+
+                                    <p:column headerText="Estado">
+                                        <h:outputText value="#{data.color}" />
+                                    </p:column>
+
+                                    <p:column headerText="Fecha de entrega">
+                                        <h:outputText value="#{data.fechaEntrega}" />
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

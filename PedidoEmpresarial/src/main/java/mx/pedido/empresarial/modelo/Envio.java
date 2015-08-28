@@ -23,7 +23,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -32,6 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "envio")
 @XmlRootElement
+@Getter
+@Setter
 @NamedQueries({
     @NamedQuery(name = "Envio.findAll", query = "SELECT e FROM Envio e"),
     @NamedQuery(name = "Envio.findById", query = "SELECT e FROM Envio e WHERE e.id = :id"),
@@ -51,12 +54,25 @@ public class Envio implements Serializable {
     @Size(max = 24)
     @Column(name = "numero_envio")
     private String numeroEnvio;
+    @Size(max = 24)
+    @Column(name = "origen")
+    private String origen;
+    @Size(max = 24)
+    @Column(name = "destino")
+    private String destino;
     @Column(name = "fecha_envio")
     @Temporal(TemporalType.DATE)
     private Date fechaEnvio;
     @Column(name = "hora_envio")
     @Temporal(TemporalType.DATE)
     private Date horaEnvio;
+    @Column(name = "fecha_llegada")
+    @Temporal(TemporalType.DATE)
+    private Date fechaLlegada;
+    @Column(name = "hora_llegada")
+    @Temporal(TemporalType.DATE)
+    private Date horaLlegada;
+    @JoinColumn(name = "factura", referencedColumnName = "id")
     @Column(name = "factura")
     private Integer factura;
     @Column(name = "eliminado")
@@ -78,94 +94,6 @@ public class Envio implements Serializable {
 
     public Envio(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNumeroEnvio() {
-        return numeroEnvio;
-    }
-
-    public void setNumeroEnvio(String numeroEnvio) {
-        this.numeroEnvio = numeroEnvio;
-    }
-
-    public Date getFechaEnvio() {
-        return fechaEnvio;
-    }
-
-    public void setFechaEnvio(Date fechaEnvio) {
-        this.fechaEnvio = fechaEnvio;
-    }
-
-    public Date getHoraEnvio() {
-        return horaEnvio;
-    }
-
-    public void setHoraEnvio(Date horaEnvio) {
-        this.horaEnvio = horaEnvio;
-    }
-
-    public Integer getFactura() {
-        return factura;
-    }
-
-    public void setFactura(Integer factura) {
-        this.factura = factura;
-    }
-
-    public Boolean getEliminado() {
-        return eliminado;
-    }
-
-    public void setEliminado(Boolean eliminado) {
-        this.eliminado = eliminado;
-    }
-
-    public Date getFechaGenero() {
-        return fechaGenero;
-    }
-
-    public void setFechaGenero(Date fechaGenero) {
-        this.fechaGenero = fechaGenero;
-    }
-
-    @XmlTransient
-    public Collection<EnvioDetalle> getEnvioDetalleCollection() {
-        return envioDetalleCollection;
-    }
-
-    public void setEnvioDetalleCollection(Collection<EnvioDetalle> envioDetalleCollection) {
-        this.envioDetalleCollection = envioDetalleCollection;
-    }
-
-    public Usuario getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Usuario genero) {
-        this.genero = genero;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
     }
 
     @Override

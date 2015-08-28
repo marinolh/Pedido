@@ -6,6 +6,7 @@
 package mx.pedido.empresarial.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,6 +40,21 @@ public class EnvioDetalle implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
+    @Size(max = 256)
+    @Column(name = "llega")
+    private String llega;
+    @Column(name = "fecha_salida")
+    @Temporal(TemporalType.DATE)
+    private Date fechaEnvio;
+    @Column(name = "hora_salida")
+    @Temporal(TemporalType.DATE)
+    private Date horaEnvio;
+    @Column(name = "fecha_llegada")
+    @Temporal(TemporalType.DATE)
+    private Date fechaLlegada;
+    @Column(name = "hora_llegada")
+    @Temporal(TemporalType.DATE)
+    private Date horaLlegada;
     @Column(name = "eliminado")
     private Boolean eliminado;
     @JoinColumn(name = "genero", referencedColumnName = "id")
@@ -53,46 +72,6 @@ public class EnvioDetalle implements Serializable {
 
     public EnvioDetalle(Integer id) {
         this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Boolean getEliminado() {
-        return eliminado;
-    }
-
-    public void setEliminado(Boolean eliminado) {
-        this.eliminado = eliminado;
-    }
-
-    public Usuario getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Usuario genero) {
-        this.genero = genero;
-    }
-
-    public PedidoDetalle getPedidoDetalle() {
-        return pedidoDetalle;
-    }
-
-    public void setPedidoDetalle(PedidoDetalle pedidoDetalle) {
-        this.pedidoDetalle = pedidoDetalle;
-    }
-
-    public Envio getEnvio() {
-        return envio;
-    }
-
-    public void setEnvio(Envio envio) {
-        this.envio = envio;
     }
 
     @Override

@@ -29,5 +29,7 @@ public interface EnvioLocal {
     List<Envio> findRange(int[] range);
 
     int count();
+
+    List traerEstadoPedido(String numeroPedido);
     
 }
