@@ -31,5 +31,7 @@ public interface EnvioLocal {
     int count();
 
     List traerEstadoPedido(String numeroPedido);
+
+    void guardarEnvio(int pedido, String sesion);
     
 }

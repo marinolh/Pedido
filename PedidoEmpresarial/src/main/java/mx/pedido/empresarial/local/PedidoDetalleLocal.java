@@ -8,6 +8,7 @@ package mx.pedido.empresarial.local;
 import java.util.List;
 import javax.ejb.Local;
 import mx.pedido.empresarial.modelo.PedidoDetalle;
+import mx.pedido.empresarial.modelo.vo.ProductoVo;
 
 /**
  *
@@ -29,5 +30,7 @@ public interface PedidoDetalleLocal {
     List<PedidoDetalle> findRange(int[] range);
 
     int count();
-    
+
+    void gurdar(String sesion, ProductoVo producto, int pedido);
+
 }

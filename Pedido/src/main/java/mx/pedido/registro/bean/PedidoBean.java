@@ -11,11 +11,14 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.event.ActionEvent;
-import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import mx.pedido.empresarial.constante.Constantes;
+import mx.pedido.empresarial.local.PedidoDetalleLocal;
 import mx.pedido.empresarial.local.PedidoLocal;
 import mx.pedido.empresarial.modelo.vo.ClienteVo;
 import mx.pedido.empresarial.modelo.vo.PedidoVo;
+import mx.pedido.empresarial.modelo.vo.ProductoVo;
 import mx.pedido.sesion.FacesUtils;
 import mx.pedido.sesion.Sesion;
 
@@ -34,7 +37,10 @@ public class PedidoBean {
     }
     @EJB
     private PedidoLocal pedidoLocal;
+    @EJB
+    private PedidoDetalleLocal pedidoDetalleLocal;
     //
+    private List<ProductoVo> productos;
     private PedidoVo pedidoVo;
     private String cliente;
     private int idCliente;
@@ -47,6 +53,27 @@ public class PedidoBean {
     public void iniciar() {
         //llenar clientes
 
+    }
+
+    public void agregarPedido(ActionEvent event) {
+        pedidoVo = new PedidoVo();
+    }
+
+    public List getTraerPedido() {
+        return pedidoLocal.traerPedido(Constantes.ESTADO_ENVIO_PENDIENTE);
+    }
+
+    public void eliminarFila(int producto) {
+        productos.remove(producto);
+        if (productos.isEmpty()) {
+            productos.add(new ProductoVo());
+        }
+        productos = new ArrayList<>(productos);
+    }
+
+    public void agregarFila() {
+        productos.add(new ProductoVo());
+        productos = new ArrayList<>(productos);
     }
 
     public List<ClienteVo> completeTheme(String query) {
@@ -68,7 +95,7 @@ public class PedidoBean {
     }
 
     public void guardar(ActionEvent event) {
-        if (pedidoLocal.guardar(sesion.getUsuarioVo().getId(), getPedidoVo(), getIdCliente())) {
+        if (pedidoLocal.guardar(sesion.getUsuarioVo().getId(), getPedidoVo(), getIdCliente(), productos)) {
             FacesUtils.addInfoMessage("Se registró el pedido . . . ");
             pedidoVo = null;
         } else {
@@ -126,5 +153,19 @@ public class PedidoBean {
      */
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    /**
+     * @return the productos
+     */
+    public List<ProductoVo> getProductos() {
+        return productos;
+    }
+
+    /**
+     * @param productos the productos to set
+     */
+    public void setProductos(List<ProductoVo> productos) {
+        this.productos = productos;
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Local;
 import mx.pedido.empresarial.modelo.Pedido;
 import mx.pedido.empresarial.modelo.vo.PedidoVo;
+import mx.pedido.empresarial.modelo.vo.ProductoVo;
 
 /**
  *
@@ -31,10 +32,10 @@ public interface PedidoLocal {
 
     int count();
 
-    boolean guardar(String sesion, PedidoVo pedidoVo, Integer cliente);
-
+    boolean guardar(String sesion, PedidoVo pedidoVo, Integer cliente, List<ProductoVo> productos);
 
     PedidoVo buscarPedido(String codigo);
 
+    List traerPedido(int estado);
 
 }

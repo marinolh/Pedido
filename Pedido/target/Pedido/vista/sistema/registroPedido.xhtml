@@ -9,87 +9,172 @@
         <ui:composition template="./../../WEB-INF/plantilla/sistema/capasSistema.xhtml">
             <ui:define name="content">
                 <p><h3 class="text-center text-primary">Registrar pedido</h3></p>
-                <h:form>
-                    <div class="container-fluid input-group panel panel-default">
-                        <br/>
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10">
-                            <div class="col-lg-12" >
-                                <div class="col-lg-2" style="text-align: left;" >
-                                    <p:outputLabel   value="Cliente:" for="cliente"/>
-                                </div>
-                                <div class="col-lg-8">
-                                    <p:autoComplete id="cliente" multiple="false" value="#{pedido.pedidoVo.nombreCliente}" 
-                                                    completeMethod="#{pedido.traerCliente()}" size="45"
-                                                    var="nombreCliente" itemLabel="#{nombreCliente.displayName}" itemValue="#{nombreCliente}" 
-                                                    forceSelection="true">
-                                        <h:outputText value="#{pedido.cliente}" />
-                                    </p:autoComplete>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" style="margin-top: 1%;">
-                                <div class="col-lg-2" style="text-align: left;" >
-                                    <p:outputLabel   value="Número: "/>
-                                </div>
-                                <div class="col-lg-6">
-                                    <p:inputText  value="#{pedido.pedidoVo.numero}"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" style="margin-top: 1%;">
-                                <div class="col-lg-2" style="text-align: left;" >
-                                    <p:outputLabel   value="Subtotal:"/>
-                                </div>
-                                <div class="col-lg-8" >
-                                    <p:inputText  value="#{pedido.pedidoVo.subtotal}"/>
-                                </div>
-                            </div>                                        
-                            <div class="col-lg-12" style="margin-top: 1%;">
-                                <div class="col-lg-2" style="text-align: left;" >
-                                    <p:outputLabel   value="Impusto:"/>
-                                </div>
-                                <div class="col-lg-8">
-                                    <p:inputText  value="#{pedido.pedidoVo.impuesto}"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" style="margin-top: 1%;">
-                                <div class="col-lg-2" style="text-align: left;" >
-                                    <p:outputLabel   value="Total:"/>
-                                </div>
-                                <div class="col-lg-8">
-                                    <p:inputText   value="#{pedido.pedidoVo.total}"/>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" style="margin-top: 1%;"> 
-                                <div class="col-lg-2" style="text-align: left;" >
-                                    <p:outputLabel   value="Móneda:"/>
-                                </div>
-                                <div class="col-lg-8">
-                                    <p:selectOneMenu id="moneda" value="#{pedido.pedidoVo.idMoneda}"> 
-                                        <f:selectItem itemLabel="Seleccione . . ." 
-                                                      itemValue="-1"/>
-                                    </p:selectOneMenu>
-                                </div>
-                            </div>
-                            <div class="col-lg-12" style="margin-top: 1%;">
-                                <div class="col-lg-2" style="text-align: left;" >
-                                    <p:outputLabel    value="Observación:"/>
-                                </div>
-                                <div class="col-lg-8">
-                                    <p:inputTextarea cols="45" rows="3" value="#{pedido.pedidoVo.observacion}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-10" style="margin-bottom:  1%;"><br/>
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-2">
-                                <h:commandLink value="Guardar" class="btn btn-info" actionListener="#{pedido.guardar}" />
-                            </div>
-                            <div class="col-lg-2">
-                                <h:commandLink value="Cancelar" class="btn btn-default" actionListener="#{pedido.cancelar}"/>
-                            </div>
-                        </div>
+                <h:form id="frmAgregarCliente">
+                    <div class="row-fluid">
+                        <p:commandLink value="Agregar pedido"  actionListener="#{pedido.agregarPedido}"
+                                       onclick="$(divAgregarPedido).modal('show');" ajax="true"/> 
+                    </div>
+                    <div class="row-fluid">
+                        <p:dataTable id="dtTabla" var="data" value="#{pedido.traerPedido}">
+                            <p:column headerText="Nombre">
+                                <p:outputLabel value="#{data.numero}"/>
+                            </p:column>
+                            <p:column headerText="Cliente">
+                                <p:outputLabel value="#{data.cliente.nombre}"/>                        
+                            </p:column>
+                            <p:column headerText="Total">
+                                <p:outputLabel value="#{data.total}"/>                        
+                            </p:column>
+                            <p:column headerText="SubTotal">
+                                <p:outputLabel value="#{data.subtotal}"/>                        
+                            </p:column>
+                            <p:column headerText="Impuesto">
+                                <p:outputLabel value="#{data.impuesto}"/>                        
+                            </p:column>
+                            <p:column headerText="Observación">
+                                <p:outputLabel value="#{data.observacion}"/>                        
+                            </p:column>
+                            <p:column >
+                                <p:commandLink value="#{pedido.agregarDetallePedido(event)}"/>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                 </h:form>
+                <div class="modal" id="divAgregarPedido" data-backdrop="static" data-keyboard="false">
+                    <div class="modal-dialog" style="z-index: 1045;">
+                        <h:form id="frmPedido">
+                            <div class="container-fluid input-group panel panel-default">
+                                <br/>
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-10">
+                                    <div class="col-lg-12" >
+                                        <div class="col-lg-2" style="text-align: left;" >
+                                            <p:outputLabel   value="Cliente:" for="cliente"/>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p:autoComplete id="cliente" multiple="false" value="#{pedido.pedidoVo.nombreCliente}" 
+                                                            completeMethod="#{pedido.traerCliente()}" size="45"
+                                                            var="nombreCliente" itemLabel="#{nombreCliente.displayName}" itemValue="#{nombreCliente}" 
+                                                            forceSelection="true">
+                                                <h:outputText value="#{pedido.cliente}" />
+                                            </p:autoComplete>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 1%;">
+                                        <div class="col-lg-2" style="text-align: left;" >
+                                            <p:outputLabel   value="Número: "/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p:inputText  value="#{pedido.pedidoVo.numero}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 1%;">
+                                        <div class="col-lg-2" style="text-align: left;" >
+                                            <p:outputLabel   value="Subtotal:"/>
+                                        </div>
+                                        <div class="col-lg-8" >
+                                            <p:inputText  value="#{pedido.pedidoVo.subtotal}"/>
+                                        </div>
+                                    </div>                                        
+                                    <div class="col-lg-12" style="margin-top: 1%;">
+                                        <div class="col-lg-2" style="text-align: left;" >
+                                            <p:outputLabel   value="Impusto:"/>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p:inputText  value="#{pedido.pedidoVo.impuesto}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 1%;">
+                                        <div class="col-lg-2" style="text-align: left;" >
+                                            <p:outputLabel   value="Total:"/>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p:inputText   value="#{pedido.pedidoVo.total}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 1%;"> 
+                                        <div class="col-lg-2" style="text-align: left;" >
+                                            <p:outputLabel   value="Móneda:"/>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p:selectOneMenu id="moneda" value="#{pedido.pedidoVo.idMoneda}"> 
+                                                <f:selectItem itemLabel="Seleccione . . ." 
+                                                              itemValue="-1"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12" style="margin-top: 1%;">
+                                        <div class="col-lg-2" style="text-align: left;" >
+                                            <p:outputLabel    value="Observación:"/>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p:inputTextarea cols="45" rows="3" value="#{pedido.pedidoVo.observacion}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="page-header">
+                                        Artículos para el pedido
+                                    </div>
+                                    <div class="panel-body">
+                                        <div style="width: 600px">
+                                            <p:dataTable id="tablaArticulos" value="#{pedido.productos}" var="ta" 
+                                                         styleClass="input articulos">
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        Artículos
+                                                    </f:facet>
+                                                    <h:inputText value="#{ta.nombre}" id="txtArticulo"  
+                                                                 styleClass="articuloAutoComplete ui-inputfield ui-textentry ui-widget ui-state-optional ui-corner-all ui-autocomplete-input">
+                                                    </h:inputText>
+                                                    <h:inputHidden value="#{ta.id}" id="hdArticuloId" required="true" 
+                                                                   requiredMessage="Es necesario agregar el articulo"/>
+                                                    <h:message for="hdArticuloId" id="msjArticulo" 
+                                                               styleClass="ui-widget ui-corner-all ui-state-error input-msg"/>
+                                                </p:column>
+                                                <p:column>
+                                                    <f:facet name="header">
+                                                        Cantidad
+                                                    </f:facet>
+                                                    <p:inputText id="txtArticuloCantidad" value="#{ta.cantidad}" 
+                                                                 styleClass="ui-inputfield ui-textentry ui-widget ui-state-optional ui-corner-all"
+                                                                 required="true" requiredMessage="Es necesario agregar la contidad" 
+                                                                 label="#{msg['sia.inventarios.movimiento.cantidad']}">
+                                                    </p:inputText>
+                                                    <p:message for="txtArticuloCantidad" id="msjArticuloCantidad" 
+                                                               styleClass="ui-widget ui-corner-all ui-state-error input-msg"/>
+                                                </p:column>
+                                                <p:column rendered="#{param['lista'] == null}">
+                                                    <p:commandLink immediate="true" styleClass="ui-icon ui-icon-closethick" 
+                                                                   title="Eliminar" 
+                                                                   action="#{pedido.eliminarFila(pedido.productos.get(ta.id))}"
+                                                                   style="width: 16px; margin: 0 10px">
+                                                    </p:commandLink>
+                                                </p:column>
+                                            </p:dataTable>
+                                            <div class="agregar">
+                                                <p:commandLink styleClass="hbutton-cr" value="#{msg['sia.inventarios.comun.agregar']}" 
+                                                               action="#{pedido.agregarFila()}"
+                                                               rendered="#{param['lista'] == null}">
+                                                    <f:ajax render="tablaArticulos" execute="tablaArticulos" onevent="crearWidgetsAjax" />
+                                                </p:commandLink>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10" style="margin-bottom:  1%;"><br/>
+                                    <div class="col-lg-2"></div>
+                                    <div class="col-lg-2">
+                                        <p:commandLink value="Guardar" class="btn btn-info" actionListener="#{pedido.guardar}" />
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <p:commandLink value="Cancelar" class="btn btn-default" actionListener="#{pedido.cancelar}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
             </ui:define>
         </ui:composition>
 

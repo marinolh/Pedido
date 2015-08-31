@@ -15,6 +15,8 @@ import javax.persistence.PersistenceContext;
 import mx.pedido.empresarial.local.EnvioDetalleLocal;
 import mx.pedido.empresarial.local.EnvioLocal;
 import mx.pedido.empresarial.modelo.Envio;
+import mx.pedido.empresarial.modelo.Pedido;
+import mx.pedido.empresarial.modelo.Usuario;
 import mx.pedido.empresarial.modelo.vo.EnvioVo;
 
 /**
@@ -71,6 +73,18 @@ public class EnvioImpl extends AbstractPedido<Envio> implements EnvioLocal {
         envioVo.setId((Integer) object[6]);
         envioVo.setListaDetalle(envioDetalleLocal.traerDetalleEnvio(envioVo.getId()));
         return envioVo;
+    }
+
+    @Override
+    public void guardarEnvio(int pedido, String sesion) {
+        //To change body of generated methods, choose Tools | Templates.
+        Envio envio = new Envio();
+        envio.setPedido(new Pedido());
+        envio.setGenero(new Usuario(sesion));
+        envio.setFechaGenero(new Date());
+        envio.setHoraGenero(new Date());
+        create(envio);
+
     }
 
 }

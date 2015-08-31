@@ -80,6 +80,9 @@ public class Envio implements Serializable {
     @Column(name = "fecha_genero")
     @Temporal(TemporalType.DATE)
     private Date fechaGenero;
+    @Column(name = "hora_genero")
+    @Temporal(TemporalType.TIME)
+    private Date horaGenero;
     @OneToMany(mappedBy = "envio")
     private Collection<EnvioDetalle> envioDetalleCollection;
     @JoinColumn(name = "genero", referencedColumnName = "id")

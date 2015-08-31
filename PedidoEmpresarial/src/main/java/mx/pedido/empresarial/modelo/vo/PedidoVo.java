@@ -6,6 +6,7 @@
 package mx.pedido.empresarial.modelo.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,14 +16,18 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PedidoVo implements Serializable{
+public class PedidoVo implements Serializable {
+
     private String numero;
+    private String codigo;
     private double total;
     private double subtotal;
-    private double  impuesto;
+    private double impuesto;
     private int idMoneda;
     private String moneda;
-    private int cliente;
-    private String nombreCliente;
     private String observacion;
+    private ClienteVo clienteVo = new ClienteVo();
+    private Date fechaSalida;
+    private Date horaSalida;
+
 }
