@@ -7,7 +7,12 @@
         <p:growl id="messages" showDetail="false"/>
         <p:menu >
             <p:submenu label="Administración">
-                <p:menuitem value="Registrar pedido" update="messages" icon="ui-icon-disk" />
+                <p:menuitem value="Registrar usuario" update="messages" icon="ui-icon-disk" 
+                            action="/vista/sistema/registroUsuario" ajax="true"/>
+                <p:menuitem value="Registrar cliente" update="messages" icon="ui-icon-disk" 
+                            action="/vista/sistema/registrarCliente" ajax="true"/>
+                <p:menuitem value="Registrar pedido" update="messages" icon="ui-icon-disk" 
+                            action="/vista/sistema/registroPedido" ajax="true"/>
                 <p:menuitem value="Iniciar proceso" update="messages" icon="ui-icon-disk" />
                 <p:menuitem value="Recepción y salida" update="messages" icon="ui-icon-disk" />
             </p:submenu>

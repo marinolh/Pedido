@@ -24,6 +24,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -40,6 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave"),
     @NamedQuery(name = "Usuario.findByEliminado", query = "SELECT u FROM Usuario u WHERE u.eliminado = :eliminado"),
     @NamedQuery(name = "Usuario.findByFechaGenero", query = "SELECT u FROM Usuario u WHERE u.fechaGenero = :fechaGenero")})
+@Getter
+@Setter
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,6 +66,9 @@ public class Usuario implements Serializable {
     @Column(name = "fecha_genero")
     @Temporal(TemporalType.DATE)
     private Date fechaGenero;
+    @Column(name = "hora_genero")
+    @Temporal(TemporalType.TIME)
+    private Date horaGenero;
     @OneToMany(mappedBy = "genero")
     private Collection<EnvioDetalle> envioDetalleCollection;
     @OneToMany(mappedBy = "genero")
@@ -93,151 +100,6 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPuesto() {
-        return puesto;
-    }
-
-    public void setPuesto(String puesto) {
-        this.puesto = puesto;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public Boolean getEliminado() {
-        return eliminado;
-    }
-
-    public void setEliminado(Boolean eliminado) {
-        this.eliminado = eliminado;
-    }
-
-    public Date getFechaGenero() {
-        return fechaGenero;
-    }
-
-    public void setFechaGenero(Date fechaGenero) {
-        this.fechaGenero = fechaGenero;
-    }
-
-    @XmlTransient
-    public Collection<EnvioDetalle> getEnvioDetalleCollection() {
-        return envioDetalleCollection;
-    }
-
-    public void setEnvioDetalleCollection(Collection<EnvioDetalle> envioDetalleCollection) {
-        this.envioDetalleCollection = envioDetalleCollection;
-    }
-
-    @XmlTransient
-    public Collection<Envio> getEnvioCollection() {
-        return envioCollection;
-    }
-
-    public void setEnvioCollection(Collection<Envio> envioCollection) {
-        this.envioCollection = envioCollection;
-    }
-
-    @XmlTransient
-    public Collection<Estado> getEstadoCollection() {
-        return estadoCollection;
-    }
-
-    public void setEstadoCollection(Collection<Estado> estadoCollection) {
-        this.estadoCollection = estadoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Factura> getFacturaCollection() {
-        return facturaCollection;
-    }
-
-    public void setFacturaCollection(Collection<Factura> facturaCollection) {
-        this.facturaCollection = facturaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
-
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
-    }
-
-    public Usuario getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Usuario genero) {
-        this.genero = genero;
-    }
-
-    @XmlTransient
-    public Collection<Moneda> getMonedaCollection() {
-        return monedaCollection;
-    }
-
-    public void setMonedaCollection(Collection<Moneda> monedaCollection) {
-        this.monedaCollection = monedaCollection;
-    }
-
-    @XmlTransient
-    public Collection<Pedido> getPedidoCollection() {
-        return pedidoCollection;
-    }
-
-    public void setPedidoCollection(Collection<Pedido> pedidoCollection) {
-        this.pedidoCollection = pedidoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Producto> getProductoCollection() {
-        return productoCollection;
-    }
-
-    public void setProductoCollection(Collection<Producto> productoCollection) {
-        this.productoCollection = productoCollection;
-    }
-
-    @XmlTransient
-    public Collection<PedidoEstado> getPedidoEstadoCollection() {
-        return pedidoEstadoCollection;
-    }
-
-    public void setPedidoEstadoCollection(Collection<PedidoEstado> pedidoEstadoCollection) {
-        this.pedidoEstadoCollection = pedidoEstadoCollection;
-    }
-
-    @XmlTransient
-    public Collection<PedidoDetalle> getPedidoDetalleCollection() {
-        return pedidoDetalleCollection;
-    }
-
-    public void setPedidoDetalleCollection(Collection<PedidoDetalle> pedidoDetalleCollection) {
-        this.pedidoDetalleCollection = pedidoDetalleCollection;
-    }
 
     @Override
     public int hashCode() {
