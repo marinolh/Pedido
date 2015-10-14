@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form >  
+        <p:growl id="messages" showDetail="false"/>
+        <p:menu >
+            <p:submenu label="Administración">
+                <p:menuitem value="Registrar usuario" update="messages" icon="ui-icon-disk" 
+                            action="/vista/sistema/registroUsuario" ajax="true"/>
+                <p:menuitem value="Registrar cliente" update="messages" icon="ui-icon-disk" 
+                            action="/vista/sistema/registrarCliente" ajax="true"/>
+                <p:menuitem value="Registrar pedido" update="messages" icon="ui-icon-disk" 
+                            action="/vista/sistema/registroPedido" ajax="true"/>
+                <p:menuitem value="Iniciar proceso" update="messages" icon="ui-icon-disk" />
+                <p:menuitem value="Recepción y salida" update="messages" icon="ui-icon-disk" />
+            </p:submenu>
+            <p:submenu label="Consulta">
+                <p:menuitem value="Consultar pedido" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+            </p:submenu>
+        </p:menu>
+    </h:form>
+</ui:composition>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <title>Cambio en la página</title>
+        <meta name="description" content="Spirit8 is a Digital agency one page template built based on bootstrap framework. This template is design by Robert Berki and coded by Jenn Pereira. It is simple, mobile responsive, perfect for portfolio and agency websites. Get this for free exclusively at ThemeForces.com"></meta>
+        <meta name="keywords" content="bootstrap theme, portfolio template, digital agency, onepage, mobile responsive, spirit8, free website, free theme, themeforces themes, themeforces wordpress themes, themeforces bootstrap theme"></meta>
+        <meta name="author" content="ThemeForces.com"></meta>
+    </h:head>
+    <body>
+        <ui:composition template="./../WEB-INF/plantilla/inicio/capas.xhtml">
+            <ui:define name="content">
+                <!-- Navigation
+                ==========================================-->
+
+
+                <!-- Home Page
+                ==========================================-->
+                <div id="tf-home" class="text-center">
+                    <div class="overlay">
+                        <div class="content">
+                            <h1>Bienvenidos al sitio <span class="color"> uno</span></h1>
+                            <p class="lead">Expertos en seguimiento de casos</p>
+                            <a href="#tf-about" class="fa fa-angle-down page-scroll"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Us Page
+                ==========================================-->
+                <div id="tf-about">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="./resources/img/empresas.png" class="img-responsive"></img>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="about-text">
+                                    <div class="section-title">
+                                        <h2><strong>Empresa</strong></h2>
+                                        <hr/>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <p class="intro">We love building and rebuilding brands through our  specific skills.</p>
+                                    <ul class="about-list">
+                                        <li>
+                                            <span class="fa fa-dot-circle-o"></span>
+                                            <strong>Mission</strong> Lorem ipsum facilisis porta aenean convallis arcu tempor sem nec etiam fames,
+                                            vestibulum enim in accumsan platea turpis eros etiam netus mattis curabitur.
+                                        </li>
+                                        <li>
+                                            <span class="fa fa-dot-circle-o"></span>
+                                            <strong>Visión</strong><em>Vel semper amet vestibulum primis condimentum laoreet nulla pellentesque.</em>
+                                        </li>
+                                        <li>
+                                            <span class="fa fa-dot-circle-o"></span>
+                                            <strong>Actividades</strong>
+                                            <em>
+                                                <lu >
+                                                    <li style="padding-left: 10%;">
+                                                        <span class="fa fa-plus-circle"></span>
+                                                        Lacus purus turpis 
+                                                    </li>
+                                                    <li style="padding-left: 10%;">
+                                                        <span class="fa fa-plus-circle"></span>
+                                                        nibh dolor laoreet venenatis 
+                                                    </li>
+                                                    <li style="padding-left: 10%;">
+                                                        <span class="fa fa-plus-circle"></span>
+                                                        viverra nulla quisque
+                                                    </li>
+                                                </lu>
+                                            </em>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <style type="text/css">
+                    h2{
+                        margin: 0;     
+                        color: #666;
+                        padding-top: 90px;
+                        font-size: 52px;
+                        font-family: "trebuchet ms", sans-serif;    
+                    }
+                    .item{
+                        background: #333;    
+                        text-align: center;
+                        height: 300px !important;
+                    }
+                    .carousel{
+                        margin-top: 20px;
+                    }
+                    .bs-example{
+                        margin: 20px;
+                    }
+                </style>
+                <!-- Team Page
+                ==========================================-->
+                <div id="tf-team"  class="text-center" >
+                    <div class="container">
+                        <div class="section-title center">
+                            <h2><strong>Nuestras instalaciones</strong></h2>
+                            <div class="line">
+                                <hr/>
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                        <div id="myCarousel"  class="carousel slide col-lg-7 text-center" data-interval="3000" data-ride="carousel" >
+                            <!-- Carousel indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>   
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="active item">
+                                    <p:graphicImage url="./resources/img/empresas.png" width="100%"/>
+                                    <div class="carousel-caption">
+                                        <h3>Primera</h3>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <p:graphicImage url="./resources/img/empresas.png" width="100%"/>
+                                    <div class="carousel-caption">
+                                        <h3>Segunda</h3>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <p:graphicImage url="./resources/img/empresas.png" width="100%"/>
+                                    <div class="carousel-caption">
+                                        <h3>Tercera</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Carousel controls -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+                <!-- Services Section
+                ==========================================-->
+                <div id="tf-services" class="text-center">
+                    <div class="container">
+                        <div class="section-title center">
+                            <h2><strong>Nuestros servicios</strong></h2>
+                            <div class="line">
+                                <hr/>
+                            </div>
+                            <div class="clearfix"></div>
+                            <small><em>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" </em></small>
+                        </div>
+                        <div class="space"></div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6 service">
+                                <i class="fa fa-desktop"></i>
+                                <h4><strong>Actividad 1</strong></h4>
+                                <p>The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", </p>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6 service">
+                                <i class="fa fa-mobile"></i>
+                                <h4><strong>Actividad 2</strong></h4>
+                                <p>The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", </p>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6 service">
+                                <i class="fa fa-camera"></i>
+                                <h4><strong>Actividad 3</strong></h4>
+                                <p>The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", </p>
+                            </div>
+
+                            <div class="col-md-3 col-sm-6 service">
+                                <i class="fa fa-bullhorn"></i>
+                                <h4><strong>Actividad 4</strong></h4>
+                                <p>The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contact Section
+                ==========================================-->
+                <div id="tf-contact" class="text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 col-lg-offset-2">
+                                <div class="section-title center">
+                                    <h3>Iniciar sesión</h3>
+                                    <div class="line"/>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"> <strong class="">Inicio</strong>
+                                        </div>
+                                        <div class="panel-body">
+                                            <form class="form-horizontal" action="Rastreo" method="post">
+                                                <div class="form-group">
+                                                    <label for="usaurio1" class="col-sm-3 control-label">Usuario</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="usuario" class="form-control" name="usaurio1" placeholder="Usuario" required=""></input>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="clave1" class="col-sm-3 control-label">Clave</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="password" class="form-control" name="clave1" placeholder="clave" required=""></input>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group last">
+                                                    <div class="col-sm-offset-6 col-md-6">
+                                                        <button type="reset" class="btn btn-default btn-md">Limpiar</button>
+                                                        <button type="submit" class="btn btn-success btn-md">Ingresar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
